@@ -15,7 +15,7 @@ from board.move import move
 
 pygame.init()
 gamedisplay= pygame.display.set_mode((800,800))
-pygame.display.set_caption("pychess")
+pygame.display.set_caption("AI Chess")
 clock=pygame.time.Clock()
 
 chessBoard=board()
@@ -29,16 +29,16 @@ allpieces=[]
 
 ######################
 ######################
-green = (0, 255, 0)
-blue = (0, 0, 128)
+black = (0, 0, 0)
+white = (255, 255, 255)
 font = pygame.font.Font('freesansbold.ttf', 32)
-text = font.render('pychess', True, green, blue)
-text1 = font.render('AI',True,green)
-text2 = font.render('2 player',True,green)
-text3=font.render('Black won by checkmate', True, green)
-text4=font.render('White won by checkmate', True, green)
-text5=font.render('stalemate', True, green)
-text6=font.render('Made by: Ahmad Raza Khawaja', True, green)
+text = font.render('AI Chess', True, black, white)
+text1 = font.render('AI',True,black)
+text2 = font.render('2 player',True,black)
+text3=font.render('Black won by checkmate', True, black)
+text4=font.render('White won by checkmate', True, black)
+text5=font.render('stalemate', True, black)
+text6=font.render('Made by: Rhugved Chavan', True, white)
 textRect = text.get_rect()
 textRect1 = text1.get_rect()
 textRect2 = text2.get_rect()
@@ -245,13 +245,6 @@ if saki=='2 player':
                                 
 
 
-
-
-
-
-
-
-
             if event.type==pygame.MOUSEBUTTONDOWN:
                 if movex.checkw(chessBoard.gameTiles)[0]=='checked' and len(moves)==0 :
                     array=movex.movesifcheckedw(chessBoard.gameTiles)
@@ -345,12 +338,6 @@ if saki=='2 player':
                     drawchesspieces()
                     promote=[]
                     promotion=False
-
-
-
-
-
-
 
                 if not len(moves)==0:
                     coord = pygame.mouse.get_pos()
@@ -477,15 +464,6 @@ if saki=='2 player':
                             gamedisplay.blit(imgx3,[(x*100)+100,(y*100)+100])
                             promote=[[y+2,x],[y+2,x+1],[y+1,x],[y+1,x+1],[m,n],[y,x]]
 
-
-
-
-
-
-
-
-
-
                 else:
                     drawchesspieces()
                     coords = pygame.mouse.get_pos()
@@ -540,26 +518,13 @@ if saki=='2 player':
                         if chessBoard.gameTiles[y][x].pieceonTile.alliance=='White':
                             moves=[]
 
-
                     imgx=pygame.transform.scale(pygame.image.load("./chessart/red_square.png",), (100,100))
                     for move in moves:
                         mx=[move[1]*100,move[0]*100]
                         gamedisplay.blit(imgx,mx)
 
-
-
-
-
-
-
-
-
         for img in allpieces:
             gamedisplay.blit(img[0],img[1])
-
-
-
-
         pygame.display.update()
         clock.tick(60)
 
@@ -641,10 +606,6 @@ if saki=='ai':
                     saki='end3'
                     quitgame=True
 
-
-
-
-
             if not turn%2==0 and promotion==False:
 
                 turn=turn+1
@@ -708,11 +669,6 @@ if saki=='ai':
                         promote=[]
                         promotion=False
 
-
-
-
-
-
             if event.type==pygame.MOUSEBUTTONDOWN:
                 if movex.checkw(chessBoard.gameTiles)[0]=='checked' and len(moves)==0 :
                     array=movex.movesifcheckedw(chessBoard.gameTiles)
@@ -767,11 +723,6 @@ if saki=='ai':
                     promotion=False
 
 
-
-
-
-
-
                 if not len(moves)==0:
                     coord = pygame.mouse.get_pos()
                     m=math.floor(coord[0]/100)
@@ -781,8 +732,6 @@ if saki=='ai':
                             turn=turn+1
                             if chessBoard.gameTiles[y][x].pieceonTile.tostring()=='k' or chessBoard.gameTiles[y][x].pieceonTile.tostring()=='r':
                                 chessBoard.gameTiles[y][x].pieceonTile.moved=True
-
-
 
                             if chessBoard.gameTiles[y][x].pieceonTile.tostring()=='k' and m==x+2:
                                 chessBoard.gameTiles[y][x+1].pieceonTile=chessBoard.gameTiles[y][x+3].pieceonTile
@@ -858,15 +807,6 @@ if saki=='ai':
                             gamedisplay.blit(imgx3,[(x*100)+100,(y*100)+100])
                             promote=[[y+2,x],[y+2,x+1],[y+1,x],[y+1,x+1],[m,n],[y,x]]
 
-
-
-
-
-
-
-
-
-
                 else:
                     drawchesspieces()
                     coords = pygame.mouse.get_pos()
@@ -890,12 +830,9 @@ if saki=='ai':
                                     moves.append([y-1,x+1])
                                 else:
                                     moves.append([y-1,x-1])
-
-
                     if chessBoard.gameTiles[y][x].pieceonTile.alliance=='White':
                         lx=movex.pinnedw(chessBoard.gameTiles,moves,y,x)
                     moves=lx
-
                     if not turn%2==0:
                         moves=[]
 
@@ -911,24 +848,11 @@ if saki=='ai':
                         mx=[move[1]*100,move[0]*100]
                         gamedisplay.blit(imgx,mx)
 
-
-
-
-
-
-
-
-
         for img in allpieces:
             gamedisplay.blit(img[0],img[1])
 
-
-
-
         pygame.display.update()
         clock.tick(60)
-
-
 if saki=='end1':
     quitgame=False
     while not quitgame:
